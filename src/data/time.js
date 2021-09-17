@@ -41,7 +41,8 @@ function fixMinute(minute) {
 module.exports.getTime = () => {
     const currentDate = new Date();
     let AMorPM = changeHourFormat(currentDate.getHours());
-    let time = AMorPM[0] + ":" + fixMinute(currentDate.getMinutes()) + ` ${AMorPM[1]}`;
+
+    let time = `${AMorPM[0]}:${fixMinute(currentDate.getMinutes())} ${AMorPM[1]}`;
 
     return time;
 } ;

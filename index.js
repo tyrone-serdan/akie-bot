@@ -29,7 +29,7 @@ client.on('messageCreate', message => {
 
 client.on('ready', () => {
     const curTime = time.getTime();
-    console.log(`aki up & running @ ${curTime}`);
+    console.log(`akie up & running @ ${curTime}`);
 });
 
 client.start(config.token);
