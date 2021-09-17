@@ -7,7 +7,7 @@ const client = new Client();
 
 
 module.exports = new Command({
-	name: "list",
+	name: "commands",
 	description: "shows list of commands",
 	async run(message, args, client) {
         const url = "https://cdn.discordapp.com/avatars/888089757811367996/192bb17f3325a9de165f139a71afc678.webp";
