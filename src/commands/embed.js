@@ -12,10 +12,10 @@ module.exports = new Command({
         console.log(userMentioned);
 
         if (userMentioned === undefined) {
-            message.reply("Cant find mentioned user :(");
+            message.reply("Can't find mentioned user :(");
             return;
         }
-        client.
+
         embed
             .setTitle(userMentioned.username)
             .setAuthor(
