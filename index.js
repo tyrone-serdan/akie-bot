@@ -1,3 +1,4 @@
+console.clear();
 // required for bot use
 
 const fs = require("fs");
@@ -9,9 +10,9 @@ const client = new Client();
 // for small features
 const time = require("./src/data/time.js");
 
-process.on('unhandledRejection', (err) => {
-    console.log(`ERROR MESSAGE: ${err}`);
-});
+// process.on('unhandledRejection', (err) => {
+//     console.log(`ERROR MESSAGE: ${err}`);
+// });
 
 client.on('messageCreate', message => {
     if (message.author.bot == true) return;
