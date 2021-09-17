@@ -5,20 +5,17 @@ const fs = require("fs");
 
 const client = new Client();
 
-
 module.exports = new Command({
-	name: "commands",
-	description: "shows list of commands",
+	name: "Commands",
+	description: "Shows list of commands.",
 	async run(message, args, client) {
         const url = "https://cdn.discordapp.com/avatars/888089757811367996/192bb17f3325a9de165f139a71afc678.webp";
-		const userMentioned = message.mentions.users.first();
 		const embed = new Discord.MessageEmbed();
 
         let arrayOfCommands = new Array();
-
         let listOfCommands = new Discord.Collection();
-        listOfCommands = client.getCommands();
 
+        listOfCommands = client.getCommands();
         listOfCommands.filter(command => arrayOfCommands.push(command));
 
         embed

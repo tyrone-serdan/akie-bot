@@ -10,14 +10,16 @@ const client = new Client();
 const time = require("./src/data/time.js");
 
 process.on('unhandledRejection', (err) => {
-    console.log(`Error occured, ${err}`);
+    console.log(`ERROR MESSAGE: ${err}`);
 });
 
 client.on('messageCreate', message => {
     if (message.author.bot == true) return;
     if (!message.content.startsWith(config.prefix)) return;
 
-    const args = message.content.substring(config.prefix.length).split(/ +/);
+    let args = message.content.substring(config.prefix.length).split(/ +/);
+    args[0] = args[0].charAt(0).toUpperCase() + args[0].slice(1);
+    
     const command = client.commands.find(cmd => cmd.name == args[0]);
 
     if (!command) return message.reply(`${args[0]} is not a valid command :(`);

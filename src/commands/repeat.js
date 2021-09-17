@@ -21,8 +21,8 @@ function putWordsIntoString(msg) {
 }
 
 module.exports = new Command({
-    name: "repeat",
-    description: "repeats what the user said",
+    name: "Repeat",
+    description: "Repeats what the user said.",
     async run(message, args, client) {
 
         let content = putWordsIntoString(args);

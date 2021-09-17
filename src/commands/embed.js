@@ -3,8 +3,8 @@ const Command = require("../Structures/Command.js");
 const Discord = require("discord.js");
 
 module.exports = new Command({
-	name: "embed",
-	description: "Shows an embed",
+	name: "Embed",
+	description: "Shows an embed.",
 	async run(message, args, client) {
 		const embed = new Discord.MessageEmbed();
 		const userMentioned = message.mentions.users.first();
