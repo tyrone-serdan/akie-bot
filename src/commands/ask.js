@@ -29,19 +29,18 @@ function getResponse() {
     let positiveResponses = ["akie says yes.", "no shit.", "absolutely, yes. as you should.", "yupp truly !!"];
     let neutralResponses = ["yes? no? akie not sure.", "well.", "are you sure you want to know the answer to that?", "think abt it again and reflect."];
     let negativeResponses = ["akie thinks no.", "of course not, are you stupid", "you’re expecting too much. it’s a no", "just give up tbh."];
-    console.log(positiveResponses[0]);
 
     let whichResponse = Math.floor(Math.random() * 4);
     if (whichResponse == 0) whichResponse = 1;
 
-    let whichMessage = Math.floor(Math.random() * positiveResponses.length - 1);
+    let whichMessage = Math.floor(Math.random() * positiveResponses.length);
 
-    if (whichMessage === 1) {
-        return positiveResponses[whichResponse];
-    } else if (whichMessage === 2) {
-        return neutralResponses[whichResponse];
-    } else if (whichMessage === 3) {
-        return negativeResponses[whichResponse];
+    if (whichResponse === 1 || whichResponse === 0) {
+        return positiveResponses[whichMessage];
+    } else if (whichResponse === 2) {
+        return neutralResponses[whichMessage];
+    } else if (whichResponse === 3) {
+        return negativeResponses[whichMessage];
     } else {
         return "tell turon something broke";
     }

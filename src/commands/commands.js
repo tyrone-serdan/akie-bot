@@ -56,7 +56,7 @@ module.exports = new Command({
                 embed
                 .setTitle(`?${cmd.name}`)
                 .setDescription(`${cmd.description}\n\`${cmd.example}\``)
-                .setColor("GOLD")
+                .setColor("WHITE")
                 .setTimestamp()
                 .setFooter(`Requested by ${message.author.username}`)
                 .setThumbnail(url);
@@ -73,7 +73,7 @@ module.exports = new Command({
                 .setTitle("List of Commands for Akie")
                 .setDescription(`Requested by ${message.author.username}`)
                 .addFields({ name: "Commands", value: Commands })
-                .setColor("GOLD")
+                .setColor("WHITE")
                 .setTimestamp()
                 .setFooter('do ?commands <command> for help info')
                 .setThumbnail(url);
