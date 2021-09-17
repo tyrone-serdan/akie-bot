@@ -30,6 +30,7 @@ client.on('messageCreate', message => {
 client.on('ready', () => {
     const curTime = time.getTime();
     console.log(`akie up & running @ ${curTime}`);
+    client.user.setActivity('?commands', {type: 'LISTENING'});
 });
 
 client.start(config.token);

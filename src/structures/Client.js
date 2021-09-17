@@ -7,7 +7,6 @@ const intents = new Discord.Intents(32767);
 module.exports = class Client extends Discord.Client {
     constructor() {
         super({ intents });
-        
         /**
          * @type {Discord.Collection<String, Command>}
          */
@@ -15,7 +14,7 @@ module.exports = class Client extends Discord.Client {
     }
     start(token) {
         this.login(token);
-
+        
         fs.readdirSync("./src/commands")
         .filter(file => file.endsWith(".js"))
         .forEach(file => {

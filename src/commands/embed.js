@@ -4,7 +4,8 @@ const Discord = require("discord.js");
 
 module.exports = new Command({
 	name: "Embed",
-	description: "Shows an embed.",
+	description: "Shows an embed of the user mentioned.",
+    example: "|| ?embed @akie",
 	async run(message, args, client) {
 		const embed = new Discord.MessageEmbed();
 		const userMentioned = message.mentions.users.first();
