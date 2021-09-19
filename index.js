@@ -38,6 +38,8 @@ client.on('messageCreate', message => {
 client.on('ready', (message) => {
     const curTime = time.getTime();
     const HoursToNotify = [1,4,7,10];
+    let justSent = false;
+
     let prettifiedDate = new String();
 
     for (let i = 0; i < curTime.length; i++) {
@@ -48,16 +50,19 @@ client.on('ready', (message) => {
     }
 
     console.log(`akie up & running @ ${prettifiedDate}`);
-    
+
     client.user.setActivity('a?commands', {type: 'LISTENING'});
 
     setInterval( () => {
         HoursToNotify.forEach(hour => {
             if (hour == curTime[0]) {
-                console.log("remind!");
+                console.log('notifying!');
+                const mudaeChannel = client.channels.cache.get("864546427953610812");
+                const id = "888681316873306122";
+                mudaeChannel.send(`<@&${id}> **ATTENTION!** Your marries have been reset!`);
             }
         })
-    }, 600000);
+    }, 3600000);
 });
 
 client.start(config.token);
