@@ -36,11 +36,11 @@ function getResponse() {
     let whichMessage = Math.floor(Math.random() * positiveResponses.length);
 
     if (whichResponse === 1 || whichResponse === 0) {
-        return positiveResponses[whichMessage];
+        return [positiveResponses[whichMessage], 'GREEN'];
     } else if (whichResponse === 2) {
-        return neutralResponses[whichMessage];
+        return [neutralResponses[whichMessage], 'YELLOW'];
     } else if (whichResponse === 3) {
-        return negativeResponses[whichMessage];
+        return [negativeResponses[whichMessage], 'DARK_RED'];
     } else {
         return "tell turon something broke";
     }
@@ -62,9 +62,9 @@ module.exports = new Command({
                 `asked by ${message.author.username}`,
                 message.author.avatarURL({ dynamic: true })
                 )
-            .setDescription(response)
+            .setDescription(response[0])
             .setTimestamp()
-            .setColor('RANDOM')
+            .setColor(response[1])
             .setFooter('akie !!');
 
         message.reply({ embeds: [embed] });

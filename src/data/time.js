@@ -7,9 +7,13 @@
 function changeHourFormat(hour) {
     let array = new Array();
     if (hour > 12) {
-        array.push(hour - 12);
-        array.push("PM");
+            array.push(hour - 12);
+            array.push("PM")
     } else {
+        if (hour == 12) {
+            array.push(hour);
+            array.push("PM");
+        }
         array.push(hour);
         array.push("AM");
     }
@@ -27,7 +31,6 @@ function fixMinute(minute) {
         minute = minute.toString();
         const zero = "0";
         let answer = zero + minute;
-
         return answer;
     } else {
         return minute;
@@ -36,13 +39,13 @@ function fixMinute(minute) {
 
 /**
  * 
- * @returns {String} - returns time (1:03 AM, 3:34 PM)
+ * @returns Time in 24hr format. (1:03 AM, 10:34 PM)
  */
 module.exports.getTime = () => {
     const currentDate = new Date();
     let AMorPM = changeHourFormat(currentDate.getHours());
 
-    let time = `${AMorPM[0]}:${fixMinute(currentDate.getMinutes())} ${AMorPM[1]}`;
+    let time = [AMorPM[0],":",fixMinute(currentDate.getMinutes()),` ${AMorPM[1]}`, currentDate.getHours()];
 
     return time;
 } ;

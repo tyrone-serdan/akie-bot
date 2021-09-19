@@ -26,7 +26,7 @@ const Discord = require("discord.js");
 }
 
 function getRandomQuote(user) {
-    let quote = ["somehow, somewhere.","many moons ago.",`back in ${user.username}'s day.`,"erkuh quote",];
+    let quote = ["somehow, somewhere.","many moons ago.",`back in ${user.username}'s day.`,"actually just happened",];
     let whichQuote = Math.floor(Math.random() * quote.length);
 
     return quote[whichQuote];

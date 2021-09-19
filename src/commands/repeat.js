@@ -8,6 +8,7 @@ function putWordsIntoString(msg) {
 
     msg.forEach(word => {
         if (word == msg[0]) {
+            console.log(`skipping ${word}`);
             return;
         }
         else {
