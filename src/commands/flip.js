@@ -31,7 +31,7 @@ function putWordsIntoString(msg) {
 module.exports = new Command({
     name: "Flip",
     description: "flips a coin.",
-    example: "?flip Heads = Do Schoolwork",
+    example: "a?flip Heads = Do Schoolwork",
     async run(message, args, client) {
         if (!args[1]) return message.reply("a question was not included :(");
 

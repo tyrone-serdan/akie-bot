@@ -36,7 +36,7 @@ function getRandomQuote(user) {
 module.exports = new Command({
 	name: "Quote",
 	description: "quotes a user.",
-    example: "?quote @akie text here",
+    example: "a?quote @akie text here",
 	async run(message, args, client) {
 		const embed = new Discord.MessageEmbed();
 		const userMentioned = message.mentions.users.first();

@@ -25,7 +25,11 @@ client.on('messageCreate', message => {
 
     if (!command) return message.reply(`${args[0]} is not a valid command :(`);
 
-    if (errorMsg) return message.reply(errorMsg);
+    if (errorMsg) {
+        let msg = errorMsg;
+        errorMsg = '';
+        return message.reply(msg);
+    }
 
     command.run(message, args, client);
 
@@ -44,7 +48,8 @@ client.on('ready', (message) => {
     }
 
     console.log(`akie up & running @ ${prettifiedDate}`);
-    client.user.setActivity('?commands', {type: 'LISTENING'});
+    
+    client.user.setActivity('a?commands', {type: 'LISTENING'});
 
     setInterval( () => {
         HoursToNotify.forEach(hour => {

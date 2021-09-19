@@ -25,8 +25,8 @@ function beautifyCommandsList(array) {
 
 module.exports = new Command({
 	name: "Commands",
-	description: "Shows a list of commands. \nshows a command's description.",
-    example: "?commands or ?commands ask",
+	description: "Shows a list of commands.\nshows a command's description.",
+    example: "a?commands\n?commands ask",
 	async run(message, args, client) {
         const url = "https://cdn.discordapp.com/avatars/888089757811367996/192bb17f3325a9de165f139a71afc678.webp";
 		const embed = new Discord.MessageEmbed();
@@ -58,7 +58,7 @@ module.exports = new Command({
                 .setDescription(`${cmd.description}\n\`${cmd.example}\``)
                 .setColor("WHITE")
                 .setTimestamp()
-                .setFooter(`Requested by ${message.author.username}`)
+                .setFooter(`requested by ${message.author.username}`)
                 .setThumbnail(url);
         
                 message.reply({ embeds: [embed] });

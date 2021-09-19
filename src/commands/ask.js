@@ -49,7 +49,7 @@ function getResponse() {
 module.exports = new Command({
     name: "Ask",
     description: "Asks the bot a yes or no question.",
-    example: "?ask are you awake?",
+    example: "a?ask are you awake?",
     async run(message, args, client) {
         const embed = new Discord.MessageEmbed();
 

@@ -47,7 +47,7 @@ function putWordsIntoString(array) {
 module.exports = new Command({
     name: "Flames",
     description: "Plays flames with the user/users mentioned",
-    example: "?flames @akie \n?flames @akie @akire",
+    example: "a?flames @akie @akire\na?flames @akie",
     async run(message, args, client) {
 
         const FLAMES = ["Friends","Lovers","Acquaintances", "Married", "Enemies", "Sweethearts"];

@@ -20,7 +20,7 @@ function isValidURL(arg) {
 module.exports = new Commands({
     name: 'Play',
     description: 'plays music from youtube.',
-    example: '?play https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    example: 'a?play https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     async run(message,args,client) {
         let channel = message.member.voice.channel;
         if (!channel) return message.reply("You are not in a voice channel :(");
