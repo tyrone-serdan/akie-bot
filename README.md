@@ -17,3 +17,5 @@ akie is a discord.js bot that I have made for a personal project :D
 > quotes a user's saying.
 - repeat
 > repeat what the user said
+- ship
+> ships a user with another user
