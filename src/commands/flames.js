@@ -50,7 +50,7 @@ module.exports = new Command({
     example: "a?flames @akie @akire\na?flames @akie",
     async run(message, args, client) {
 
-        const FLAMES = ["Friends","Lovers","Acquaintances", "Married", "Enemies", "Sweethearts"];
+        const FLAMES = ["friends","lovers","acquaintances", "married", "enemies", "sweethearts"];
         const embed = new Discord.MessageEmbed();
 
         let arrayofLetters = new Array();
@@ -63,16 +63,27 @@ module.exports = new Command({
         if (!args[1]) return message.reply("mention/mentions are not included :(");
 
         if (!args[2]) {
+
             selfName = message.author.username;
             otherName = message.mentions.users.first().username;
-            console.log(`selfname = ${selfName} \notherName = ${otherName}`);
-        } else if (args[2]) {
-            console.log(`args[1] = ${args[1]} \nargs[2] = ${args[2]}`);
-            const mentions = message.mentions.users.first(2);
 
-            selfName = mentions[0].username;
-            otherName = mentions[1].username;
-            console.log(`selfname = ${selfName} \notherName = ${otherName}`);
+        } else if (args[2]) {
+
+            if (!args[1].startsWith("<@")) {
+
+                selfName = args[1];
+                otherName = args[2];
+
+            } else {
+
+                const mentions = message.mentions.users.first(2);
+
+                selfName = mentions[0].username;
+                otherName = mentions[1].username;
+
+            }
+
+            console.log(`selfname = ${selfName}\n otherName = ${otherName}`);
         }
 
         
@@ -89,6 +100,7 @@ module.exports = new Command({
 
         // small [turon]
         // big [aaron]
+
 
         for (let index = 0; index < smallerArray.length; index++) {
             const letterToCompare = smallerArray[index];
@@ -110,9 +122,16 @@ module.exports = new Command({
 
         let amountOfLetters = arrayofLetters.length;
 
+        console.log(amountOfLetters);
+
         while (amountOfLetters > 6) {
             amountOfLetters = amountOfLetters - 6;
         }
+
+        if (amountOfLetters - 1 == -1) {
+            amountOfLetters = 1
+        }
+        
 
         const result = FLAMES[amountOfLetters - 1];
 

@@ -53,17 +53,5 @@ module.exports = new Command({
             .setTimestamp();
 
             message.reply({ embeds: [embed] });
-            
-    //     embed
-    //     .setAuthor(
-    //         userMentioned.username,
-    //         userMentioned.avatarURL({ dynamic: true })
-    //     )
-    //     .setDescription(putWordsIntoString(args))
-    //     .setColor("RANDOM")
-    //     .setFooter(`Sent | ${getRandomQuote(userMentioned)}`)
-    //     .setTimestamp()
-
-    //      message.reply({ embeds: [embed] });
     }
 });

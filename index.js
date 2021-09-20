@@ -37,6 +37,7 @@ client.on('messageCreate', message => {
 
 client.on('ready', (message) => {
     const curTime = time.getTime();
+    console.log(curTime[0]);
     const HoursToNotify = [1,4,7,10];
     let justSent = false;
 
@@ -55,7 +56,8 @@ client.on('ready', (message) => {
 
     setInterval( () => {
         HoursToNotify.forEach(hour => {
-            if (hour == curTime[0]) {
+            const updatedTime = time.getTime();
+            if (hour == updatedTime[0]) {
                 console.log('notifying!');
                 const mudaeChannel = client.channels.cache.get("864546427953610812");
                 const id = "888681316873306122";
