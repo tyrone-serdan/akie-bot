@@ -48,6 +48,7 @@ module.exports = new Command({
     name: "Flames",
     description: "Plays flames with the user/users mentioned",
     example: "a?flames @akie @akire\na?flames @akie",
+    type: "Fun",
     async run(message, args, client) {
 
         const FLAMES = ["friends","lovers","acquaintances", "married", "enemies", "sweethearts"];

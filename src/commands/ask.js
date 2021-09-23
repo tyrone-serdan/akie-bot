@@ -50,6 +50,7 @@ module.exports = new Command({
     name: "Ask",
     description: "Asks the bot a yes or no question.",
     example: "a?ask are you awake?",
+    type: "Decision",
     async run(message, args, client) {
         const embed = new Discord.MessageEmbed();
 

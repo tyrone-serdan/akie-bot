@@ -32,8 +32,12 @@ module.exports = new Command({
     name: "Flip",
     description: "flips a coin.",
     example: "a?flip Heads = Do Schoolwork",
+    type: "Decision",
     async run(message, args, client) {
         if (!args[1]) return message.reply("a question was not included :(");
+        let amountOfMentions = 0;
+
+        console.log(args);
 
         const user = message.author;
         const embed = new Discord.MessageEmbed();
@@ -46,8 +50,7 @@ module.exports = new Command({
                 `${user.username} asked...`,
                 user.avatarURL({ dynamic: true })
             )
-            .setTitle(question)
-            .setDescription(result)
+            .setDescription(`${question}\n**${result}**`)
             .setColor("RANDOM")
             .setFooter("akie !!")
             .setTimestamp();

@@ -37,6 +37,7 @@ module.exports = new Command({
 	name: "Quote",
 	description: "quotes a user.",
     example: "a?quote @akie text here",
+    type: "Fun",
 	async run(message, args, client) {
 		const embed = new Discord.MessageEmbed();
 		const userMentioned = message.mentions.users.first();

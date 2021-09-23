@@ -58,6 +58,7 @@ module.exports = new Command({
     name: "Ship",
     description: "calculate ship",
     example: "a?ship @akie @akire \n a?ship @akie",
+    type: "Fun",
     async run(message, args, client) {
         console.log(args);
         if (!args[1]) return message.reply("mentions or names were not included :(");
@@ -68,33 +69,23 @@ module.exports = new Command({
         const embed = new Discord.MessageEmbed();
         const whoAsked = message.author.username;
 
-        if (!args[2]) {
-            selfName = message.author.username;
-
-            if (args[2].startsWith("<@")) {
-                otherName = message.mentions.users.first().username;
-            } else {
-                otherName = args[2];
-            }
-
-        } else if (args[2]) {
-
-            if (!args[1].startsWith("<@")) {
-                
-                selfName = args[1];
-                otherName = args[2];
-
-            } else {
-
-                const mentions = message.mentions.users.first(2);
-
-                selfName = mentions[0].username;
-                otherName = mentions[1].username;
-
-            }
-
-            console.log(`selfname = ${selfName}\n otherName = ${otherName}`);
+        // I swear ill clean this up when i find a better way
+        if (args[1].startsWith("<@") && !args[2].startsWith("<@")) {
+            selfName = message.mentions.users.first().username;
+            otherName = args[2];
+        } else if (!args[1].startsWith("<@") && args[2].startsWith("<@")) {
+            selfName = args[1];
+            otherName = message.mentions.users.first().username;
+        } else if (args[1].startsWith("<@") && args[2].startsWith("<@")) {
+            const mentions = message.mentions.users.first(2);
+            selfName = mentions[0].username;
+            otherName = mentions[1].username;
+        } else {
+            selfName = args[1];
+            otherName = args[2];
         }
+
+        console.log(`selfName = ${selfName}\notherName = ${otherName}`);
 
         let amountOfHearts = new Array();
         let embedDescription = new Array();

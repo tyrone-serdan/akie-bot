@@ -37,7 +37,6 @@ client.on('messageCreate', message => {
 
 client.on('ready', (message) => {
     const curTime = time.getTime();
-    console.log(curTime[0]);
     const HoursToNotify = [1,4,7,10];
     let justSent = false;
 
@@ -52,7 +51,7 @@ client.on('ready', (message) => {
 
     console.log(`akie up & running @ ${prettifiedDate}`);
 
-    client.user.setActivity('a?commands', {type: 'LISTENING'});
+    client.user.setActivity('turon wailing while debugging', {type: 'LISTENING'});
 
     setInterval( () => {
         HoursToNotify.forEach(hour => {
@@ -64,7 +63,7 @@ client.on('ready', (message) => {
                 mudaeChannel.send(`<@&${id}> **ATTENTION!** Your marries have been reset!`);
             }
         })
-    }, 3600000);
+    }, 3600000 / 2);
 });
 
 client.start(config.token);
