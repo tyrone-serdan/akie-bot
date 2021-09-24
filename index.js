@@ -57,7 +57,7 @@ client.on('ready', (message) => {
 
     console.log(`akie up & running @ ${prettifiedDate}`);
 
-    client.user.setActivity('turon wailing while debugging', {type: 'LISTENING'});
+    client.user.setActivity('a?commands', {type: 'LISTENING'});
 });
 
 client.start(config.token);
