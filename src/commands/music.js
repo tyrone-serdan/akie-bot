@@ -66,14 +66,18 @@ module.exports = new Command({
         const chosenGenre = getGenre(args[1]);
 
         let channel = message.member.voice.channel;
-
+        let connection;
         const player = DiscordVoice.createAudioPlayer();
 
-        const connection = await DiscordVoice.joinVoiceChannel({
-            channelId: channel.id,
-            guildId: channel.guild.id,
-            adapterCreator: channel.guild.voiceAdapterCreator
-        });
+        if (channel) {
+            connection = await DiscordVoice.joinVoiceChannel({
+                channelId: channel.id,
+                guildId: channel.guild.id,
+                adapterCreator: channel.guild.voiceAdapterCreator
+            });
+        } else {
+            return message.reply("you are not in a voice channel!");
+        }
 
         if (!chosenGenre[0].startsWith("https://")) {
 
@@ -102,7 +106,7 @@ module.exports = new Command({
             connection.subscribe(player);
     
             const songName = ytInfo.video_details.title;
-            
+
             embed
                 .setColor("RED")
                 .setAuthor(
