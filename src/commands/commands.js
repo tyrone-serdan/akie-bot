@@ -1,4 +1,4 @@
-const Command = require("../Structures/Command.js");
+const Command = require("../structures/Command.js");
 const Client = require("../structures/Client.js")
 const Discord = require("discord.js");
 const fs = require("fs");
