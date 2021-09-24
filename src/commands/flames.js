@@ -63,28 +63,20 @@ module.exports = new Command({
         
         if (!args[1]) return message.reply("mention/mentions are not included :(");
 
-        if (!args[2]) {
-
-            selfName = message.author.username;
+        // I swear ill clean this up when i find a better way
+        if (args[1].startsWith("<@") && !args[2].startsWith("<@")) {
+            selfName = message.mentions.users.first().username;
+            otherName = args[2];
+        } else if (!args[1].startsWith("<@") && args[2].startsWith("<@")) {
+            selfName = args[1];
             otherName = message.mentions.users.first().username;
-
-        } else if (args[2]) {
-
-            if (!args[1].startsWith("<@")) {
-
-                selfName = args[1];
-                otherName = args[2];
-
-            } else {
-
-                const mentions = message.mentions.users.first(2);
-
-                selfName = mentions[0].username;
-                otherName = mentions[1].username;
-
-            }
-
-            console.log(`selfname = ${selfName}\n otherName = ${otherName}`);
+        } else if (args[1].startsWith("<@") && args[2].startsWith("<@")) {
+            const mentions = message.mentions.users.first(2);
+            selfName = mentions[0].username;
+            otherName = mentions[1].username;
+        } else {
+            selfName = args[1];
+            otherName = args[2];
         }
 
         
@@ -122,8 +114,6 @@ module.exports = new Command({
     
 
         let amountOfLetters = arrayofLetters.length;
-
-        console.log(amountOfLetters);
 
         while (amountOfLetters > 6) {
             amountOfLetters = amountOfLetters - 6;

@@ -1,8 +1,14 @@
 console.clear();
 // required for bot use
 const Client = require("./src/structures/Client.js");
-const config = require("./src/data/config.json");
 const client = new Client();
+const express = require("express");
+const app = express();
+const port = 3000;
+const config = require("./src/data/config.json");
+app.all('/', (req,res) => res.send("I'm Alive!"));
+
+app.listen(port, () => console.log(`running on localhost:${port}`));
 
 // for small features
 const time = require("./src/data/time.js");
@@ -52,18 +58,6 @@ client.on('ready', (message) => {
     console.log(`akie up & running @ ${prettifiedDate}`);
 
     client.user.setActivity('turon wailing while debugging', {type: 'LISTENING'});
-
-    setInterval( () => {
-        HoursToNotify.forEach(hour => {
-            const updatedTime = time.getTime();
-            if (hour == updatedTime[0]) {
-                console.log('notifying!');
-                const mudaeChannel = client.channels.cache.get("864546427953610812");
-                const id = "888681316873306122";
-                mudaeChannel.send(`<@&${id}> **ATTENTION!** Your marries have been reset!`);
-            }
-        })
-    }, 3600000 / 2);
 });
 
 client.start(config.token);

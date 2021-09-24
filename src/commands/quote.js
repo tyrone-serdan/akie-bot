@@ -54,7 +54,7 @@ module.exports = new Command({
             )
             .setDescription(putWordsIntoString(args))
             .setColor("RANDOM")
-            .setFooter(`Sent | ${getRandomQuote(userMentioned)}`)
+            .setFooter(`sent | ${getRandomQuote(userMentioned)}`)
             .setTimestamp()
 
 		message.reply({ embeds: [embed] });

@@ -2,6 +2,9 @@ const Command = require("../structures/Command.js");
 const Discord = require("discord.js");
 const DiscordVoice = require("@discordjs/voice");
 const ytdl = require("ytdl-core");
+const playdl = require("play-dl");
+const { crypto_secretstream_xchacha20poly1305_keygen } = require("libsodium-wrappers");
+
 
 /**
  * 
@@ -52,7 +55,7 @@ function getGenre(arg) {
 }
 
 module.exports = new Command({
-    name: "Music",
+    name: "Genre",
     description: "plays a collection of songs of the given genre",
     example: "a?music japanese",
     type: "Music",
@@ -64,8 +67,8 @@ module.exports = new Command({
 
         let channel = message.member.voice.channel;
 
-
         const player = DiscordVoice.createAudioPlayer();
+
         const connection = await DiscordVoice.joinVoiceChannel({
             channelId: channel.id,
             guildId: channel.guild.id,
@@ -90,30 +93,26 @@ module.exports = new Command({
             return message.reply({embeds : [embed] });
 
         } else if (!chosenGenre[0].startsWith("That is not a")){
-            const resource = DiscordVoice.createAudioResource(
-                ytdl(chosenGenre[0], 
-                    {filter: "audioonly"}
-                    )
-                );
+
+            let ytInfo = await playdl.video_info(chosenGenre[0]);
+            let stream = await playdl.stream_from_info(ytInfo);
+            const resource = DiscordVoice.createAudioResource(stream.stream, { inputType : stream.type});
         
             player.play(resource);
             connection.subscribe(player);
     
-            const songName = (await ytdl.getInfo(chosenGenre[0])).videoDetails;
-    
-            console.log(songName.thumbnails)
+            const songName = ytInfo.video_details.title;
+            
             embed
                 .setColor("RED")
                 .setAuthor(
                     message.author.username,
                     message.author.avatarURL({ dynamic: true })
                 )
-                .setTitle(`Now playing ${songName.title}!`)
-                .setURL(chosenGenre[0])
+                .setTitle(`Now playing ${ytInfo.video_details.title}!`)
+                .setURL(ytInfo.video_details.url)
+                .setImage(ytInfo.video_details.thumbnail.url)
                 .setTimestamp()
-                .setImage(
-                    songName.thumbnails[4].url
-                )
                 .setFooter('akie !!');
     
             return message.reply({ embeds: [embed] });
@@ -125,10 +124,5 @@ module.exports = new Command({
             
             return message.reply({ embeds: [embed] });
         }
-        // const jazzLinks = ["lj4VncsqFQw","neV3EPgvZ3g","305FjhbMagc"];
-        // const getRandomJazz = jazzLinks[Math.floor(Math.random() * jazzLinks.length)];
-        // const jazzChosen = `https://www.youtube.com/watch?v=${getRandomJazz}`;
-        // console.log(jazzChosen);
-        // const stream = ytdl(jazzChosen, {filter: 'audioonly'});
     }
 });
