@@ -1,6 +1,48 @@
 const Command = require("../../structures/Command.js");
 const Discord = require("discord.js");
 
+
+/**
+ * 
+ * @param {Array} args
+ * @param {Discord.Message | Discord.Interaction} message
+ * @param {String} selfName
+ * @param {String} otherName
+ */
+ function getNames(args, message, selfName, otherName) {
+
+    if (args[1].startsWith("<@") && !args[2].startsWith("<@")) {
+
+        selfName = message.mentions.users.first().username;
+        otherName = args[2];
+
+    } else if (!args[1].startsWith("<@") && args[2].startsWith("<@")) {
+
+        selfName = args[1];
+        otherName = message.mentions.users.first().username;
+
+    } else if (args[1].startsWith("<@") && args[2].startsWith("<@")) {
+
+        const mentions = message.mentions.users.first(2);
+        selfName = mentions[0].username;
+        otherName = mentions[1].username;
+
+    } else if (args[1] && args[2]) {
+
+        selfName = args[1];
+        otherName = args[2];
+
+    } else {
+
+        selfName = message.author.username;
+        otherName = message.mentions.users.first().username;
+
+    }
+
+    selfName = selfName.toLowerCase();
+    otherName = otherName.toLowerCase();
+}
+
 /**
  * @param {Number} amountOfHearts
  * @param {Array} array 
@@ -47,9 +89,7 @@ function calculateShip(amountOfHearts, array) {
 }
 
 function shipPercent() {
-    const MAX = 100;
-    const shipPercentage = Math.floor(Math.random() * MAX + 1);
-    let amountOfHearts = Math.round(shipPercentage / 20);
+    let amountOfHearts = Math.floor(Math.random() * 6);
     return amountOfHearts;
 }
 
@@ -69,21 +109,7 @@ module.exports = new Command({
         const embed = new Discord.MessageEmbed();
         const whoAsked = message.author.username;
 
-        // I swear ill clean this up when i find a better way
-        if (args[1].startsWith("<@") && !args[2].startsWith("<@")) {
-            selfName = message.mentions.users.first().username;
-            otherName = args[2];
-        } else if (!args[1].startsWith("<@") && args[2].startsWith("<@")) {
-            selfName = args[1];
-            otherName = message.mentions.users.first().username;
-        } else if (args[1].startsWith("<@") && args[2].startsWith("<@")) {
-            const mentions = message.mentions.users.first(2);
-            selfName = mentions[0].username;
-            otherName = mentions[1].username;
-        } else {
-            selfName = args[1];
-            otherName = args[2];
-        }
+        getNames(args, message, selfName, otherName);
 
         console.log(`selfName = ${selfName}\notherName = ${otherName}`);
 
