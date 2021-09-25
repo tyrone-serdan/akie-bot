@@ -1,9 +1,8 @@
-const Command = require("../structures/Command.js");
+const Command = require("../../structures/Command.js");
 const Discord = require("discord.js");
 const DiscordVoice = require("@discordjs/voice");
-const ytdl = require("ytdl-core");
 const playdl = require("play-dl");
-const { crypto_secretstream_xchacha20poly1305_keygen } = require("libsodium-wrappers");
+
 
 
 /**
@@ -101,7 +100,7 @@ module.exports = new Command({
             let ytInfo = await playdl.video_info(chosenGenre[0]);
             let stream = await playdl.stream_from_info(ytInfo);
             const resource = DiscordVoice.createAudioResource(stream.stream, { inputType : stream.type});
-        
+            
             player.play(resource);
             connection.subscribe(player);
     

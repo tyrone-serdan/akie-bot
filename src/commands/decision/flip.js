@@ -1,4 +1,4 @@
-const Command = require("../structures/Command.js");
+const Command = require("../../structures/Command.js");
 const Discord = require("discord.js");
 
 function coinFlip() {

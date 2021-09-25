@@ -1,48 +1,46 @@
-const Command = require("../structures/Command.js");
+const Command = require("../../structures/Command.js");
 const Discord = require("discord.js");
 
 /**
- * @param {Array} msg 
- */
-function setupArgs(msg) {
-    let content = new String();
-
-    msg.forEach(word => {
-        if (word == msg[0]) {
-            console.log(`skipping ${word}`);
-            return;
-        }
-        else {
-            word = word + " ";
-            content += word;
-        }
-    });
-
-    return content;
-
-}
-
-/**
  * 
- * @param {Array} array 
+ * @param {Array} args
+ * @param {Discord.Message | Discord.Interaction} message
+ * @param {String} selfName
+ * @param {String} otherName
  */
-function putWordsIntoString(array) {
-    let content = new String();
+function getNames(args, message, selfName, otherName) {
 
-    array.forEach(word => {
-        word = word + " ";
-        content += word;
-    });
+    if (args[1].startsWith("<@") && !args[2].startsWith("<@")) {
 
-    return content;
+        selfName = message.mentions.users.first().username;
+        otherName = args[2];
+
+    } else if (!args[1].startsWith("<@") && args[2].startsWith("<@")) {
+
+        selfName = args[1];
+        otherName = message.mentions.users.first().username;
+
+    } else if (args[1].startsWith("<@") && args[2].startsWith("<@")) {
+
+        const mentions = message.mentions.users.first(2);
+        selfName = mentions[0].username;
+        otherName = mentions[1].username;
+
+    } else if (args[1] && args[2]) {
+
+        selfName = args[1];
+        otherName = args[2];
+
+    } else {
+
+        selfName = message.author.username;
+        otherName = message.mentions.users.first().username;
+
+    }
+
+    selfName = selfName.toLowerCase();
+    otherName = otherName.toLowerCase();
 }
-
-// Get the name of the messager and the person @ed,
-// foreach letter of both names, check if they are the same letter,
-// if yes, add them to array, if not, return.
-// get the amount of letters left over.
-// then use up the letters left over to count flames until we end at a letter.
-
 
 module.exports = new Command({
     name: "Flames",
@@ -50,6 +48,8 @@ module.exports = new Command({
     example: "a?flames @akie @akire\na?flames @akie",
     type: "Fun",
     async run(message, args, client) {
+
+        if (!args[1]) return message.reply("user/users are not included :(");
 
         const FLAMES = ["friends","lovers","acquaintances", "married", "enemies", "sweethearts"];
         const embed = new Discord.MessageEmbed();
@@ -60,28 +60,10 @@ module.exports = new Command({
 
         let selfName = new String();
         let otherName = new String();
-        
-        if (!args[1]) return message.reply("mention/mentions are not included :(");
+    
 
-        // I swear ill clean this up when i find a better way
-        if (args[1].startsWith("<@") && !args[2].startsWith("<@")) {
-            selfName = message.mentions.users.first().username;
-            otherName = args[2];
-        } else if (!args[1].startsWith("<@") && args[2].startsWith("<@")) {
-            selfName = args[1];
-            otherName = message.mentions.users.first().username;
-        } else if (args[1].startsWith("<@") && args[2].startsWith("<@")) {
-            const mentions = message.mentions.users.first(2);
-            selfName = mentions[0].username;
-            otherName = mentions[1].username;
-        } else {
-            selfName = args[1];
-            otherName = args[2];
-        }
-
+        getNames(args, message, selfName, otherName);
         
-        selfName = selfName.toLowerCase();
-        otherName = otherName.toLowerCase();
 
         if (otherName.length < selfName.length) {
             biggerArray = otherName;
@@ -91,8 +73,6 @@ module.exports = new Command({
             smallerArray = otherName;
         }
 
-        // small [turon]
-        // big [aaron]
 
 
         for (let index = 0; index < smallerArray.length; index++) {
