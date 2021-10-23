@@ -1,9 +1,9 @@
 const Discord = require("discord.js");
-
+const { prefix } =  require("../Data/config.json");
 /**
  * 
- * @param {Discord.Message | Discord.Interaction} message 
- * @param {string[]} args 
+ * @param {Discord.Message} message 
+ * @param {String[]} args 
  * @param {Discord.Client} client 
  */
 
@@ -11,7 +11,7 @@ function runFunction(message, args, client) {}
 
 module.exports = class Command {
     /**
-     * @typedef {{name: String, description: String,type: String ,example: String,run: runFunction}} CommandOptions
+     * @typedef {{name: String, description: String, type: String , example: String, run: runFunction}} CommandOptions
      * @param {CommandOptions} options 
      */
     constructor(options) {

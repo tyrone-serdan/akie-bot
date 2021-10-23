@@ -17,7 +17,6 @@
     "express": "^4.17.1",
     "ffmpeg-static": "^4.4.0",
     "libsodium-wrappers": "^0.7.9",
-    "play-dl": "^1.0.2",
-    "ytdl-core": "^4.9.1"
+    "play-dl": "^1.0.2"
   }
 }
