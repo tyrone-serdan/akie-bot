@@ -8,11 +8,9 @@ module.exports = new Command({
     description:"joins the voice channel.",
     example:`${prefix}${commandName}`,
     async run(message, args, client) {
-        console.log("bruhvrivh");
         const userChannel = message.member.voice.channel;
-        let connection;
         if (userChannel) {
-            connection = await joinVoiceChannel({
+            await joinVoiceChannel({
                 channelId: userChannel.id,
                 guildId: userChannel.guild.id,
                 adapterCreator: userChannel.guild.voiceAdapterCreator
