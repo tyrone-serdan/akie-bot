@@ -11,8 +11,6 @@ akie is a discord.js bot that I have made for a personal project :D
 > plays the game FLAMES with user/users mentioned
 - flip
 > flips a coin
-- _~~play~~_
-> _~~plays a song from youtube~~_
 - quote
 > quotes a user's saying.
 - repeat
