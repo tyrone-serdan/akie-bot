@@ -52,4 +52,13 @@ module.exports = class Queue {
         const queue = this.queues.get(guildID)
         let newQueue = queue.filter(qs => qs !== song);
     }
+
+    /**
+     * 
+     * @param {String} guildID 
+     */
+    skipSong(guildID) {
+        const queue = this.queues.get(guildID);
+        this.removeSong(guildID, queue[0]);
+    }
 }

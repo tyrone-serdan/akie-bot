@@ -2,7 +2,7 @@ console.clear();
 // required for bot use
 const Client = require("./src/structures/Client.js");
 const config = require("./src/Data/config.json");
-const queue = require("./src/Structures/Queue.js");
+const Queue = require("./src/Structures/Queue.js");
 const client = new Client();
 const port = 3000;
 
@@ -12,6 +12,7 @@ express().all('/', (req,res) => res.send("I'm Alive!"));
 express().listen(port, () => console.log(`running on localhost:${port}`));
 
 
+global.songQueues = new Queue();
 
 process.on('unhandledRejection', (err) => {
     console.log(err);
