@@ -1,5 +1,7 @@
 const Command = require("../structures/Command.js");
 const Discord = require("discord.js");
+const { Misc } = require("../Data/misc.js");
+const misc = new Misc();
 
 function coinFlip() {
     let randNum = Math.random();
@@ -43,7 +45,7 @@ module.exports = new Command({
         const embed = new Discord.MessageEmbed();
         const result = coinFlip();
 
-        let question = putWordsIntoString(args);
+        let question = misc.stringifyArray(args);
 
         embed
             .setAuthor(

@@ -1,29 +1,7 @@
 const Command = require("../structures/Command.js");
 const Discord = require("discord.js");
-
-
-/**
- * 
- * @param {Array} msg 
- * @returns {String}
- */
-
-function putWordsIntoString(msg) {
-    let content = new String();
-
-    msg.forEach(word => {
-        if (word == msg[0]) {
-            return;
-        }
-        else {
-            word = word + " ";
-            content += word;
-        }
-    });
-
-    return content;
-
-}
+const { Misc } = require("../Data/misc.js");
+const misc = new Misc();
 
 function getResponse() {
     let positiveResponses = ["akie says yes.", "no shit.", "absolutely, yes. as you should.", "yupp truly !!"];
@@ -54,7 +32,7 @@ module.exports = new Command({
     async run(message, args, client) {
         const embed = new Discord.MessageEmbed();
 
-        let question = putWordsIntoString(args);
+        let question = misc.stringifyArray(args);
         let response = getResponse();
 
         embed

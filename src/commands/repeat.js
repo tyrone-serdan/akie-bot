@@ -1,25 +1,6 @@
 const Command = require("../structures/Command.js");
-
-/**
- * @param {Array} msg 
- */
-function putWordsIntoString(msg) {
-    let content = new String();
-
-    msg.forEach(word => {
-        if (word == msg[0]) {
-            console.log(`skipping ${word}`);
-            return;
-        }
-        else {
-            word = word + " ";
-            content += word;
-        }
-    });
-
-    return content;
-
-}
+const { Misc } = require("../Data/misc.js");
+const misc = new Misc();
 
 module.exports = new Command({
     name: "Repeat",
@@ -28,7 +9,7 @@ module.exports = new Command({
     type: "Fun",
     async run(message, args, client) {
 
-        let content = putWordsIntoString(args);
+        let content = misc.stringifyArray(args);
         await message.reply(content);
         
     }

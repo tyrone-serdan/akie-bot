@@ -18,7 +18,7 @@ function beautifyCommandsList(array) {
     let fun = new String();
     let music = new String();
     
-    array.forEach((element, key) => {
+    array.forEach((element) => {
 
         switch (element.type) {
             case "Decision":

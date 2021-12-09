@@ -1,41 +1,6 @@
 const Command = require("../structures/Command.js");
 const Discord = require("discord.js");
 
-/**
- * @param {Array} msg 
- */
-function setupArgs(msg) {
-    let content = new String();
-
-    msg.forEach(word => {
-        if (word == msg[0]) {
-            console.log(`skipping ${word}`);
-            return;
-        }
-        else {
-            word = word + " ";
-            content += word;
-        }
-    });
-
-    return content;
-
-}
-
-/**
- * 
- * @param {Array} array 
- */
-function putWordsIntoString(array) {
-    let content = new String();
-
-    array.forEach(word => {
-        word = word + " ";
-        content += word;
-    });
-
-    return content;
-}
 
 // Get the name of the messager and the person @ed,
 // foreach letter of both names, check if they are the same letter,

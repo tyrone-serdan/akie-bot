@@ -1,29 +1,8 @@
 const Command = require("../structures/Command.js");
 
 const Discord = require("discord.js");
-
-/**
- * @param {Array} msg 
- */
- function putWordsIntoString(msg) {
-    let content = new String();
-
-    msg.forEach(word => {
-        if (word == msg[0]) {
-            return;
-        }
-        else {
-            if (word == msg[1]) {
-                return;
-            }
-
-            word = word + " ";
-            content += word;
-        }
-    });
-
-    return content;
-}
+const { Misc } = require("../Data/misc.js");
+const misc = new Misc();
 
 function getRandomQuote(user) {
     let quote = ["somehow, somewhere.","many moons ago.",`back in ${user.username}'s day.`,"actually just happened",];
@@ -52,7 +31,7 @@ module.exports = new Command({
                 userMentioned.username,
                 userMentioned.avatarURL({ dynamic: true })
             )
-            .setDescription(putWordsIntoString(args))
+            .setDescription(misc.stringifyArray(args))
             .setColor("RANDOM")
             .setFooter(`sent | ${getRandomQuote(userMentioned)}`)
             .setTimestamp()

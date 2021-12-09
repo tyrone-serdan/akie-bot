@@ -1,5 +1,7 @@
 const Command = require("../structures/Command.js");
 const Discord = require("discord.js");
+const { Misc } = require("../Data/misc.js");
+const misc = new Misc();
 
 /**
  * @param {Number} amountOfHearts
@@ -29,21 +31,6 @@ function calculateShip(amountOfHearts, array) {
     console.log(array);
     array.push(amountofRedHearts);
     array.push(reactions[amountofRedHearts - 1]);
-}
-
-/**
- * @param {Array} msg 
- */
- function putWordsIntoString(msg) {
-    let content = new String();
-
-    msg.forEach(word => {
-            word = word + " ";
-            content += word;
-    });
-
-    return content;
-
 }
 
 function shipPercent() {
@@ -105,7 +92,7 @@ module.exports = new Command({
                 message.author.avatarURL({ dynamic: true })
             )
             .setTitle(`${client.user.username} thinks that ${selfName} & ${otherName} are...`)
-            .setDescription(`${putWordsIntoString(embedDescription)}`)
+            .setDescription(`${misc.stringifyArray(embedDescription)}`)
             .addField(
                 `${amountOfHearts[amountOfHearts.length - 2]}/5 💖!`,
                 amountOfHearts[amountOfHearts.length - 1]
