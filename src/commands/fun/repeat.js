@@ -1,4 +1,9 @@
+<<<<<<< HEAD:src/commands/repeat.js
 const Command = require("../structures/Command.js");
+const { Misc } = require("../Data/misc.js");
+const misc = new Misc();
+=======
+const Command = require("../../structures/Command.js");
 
 /**
  * @param {Array} msg 
@@ -20,6 +25,7 @@ function putWordsIntoString(msg) {
     return content;
 
 }
+>>>>>>> 28d8f975d5fe73f481dd18ead2c205007b4dbcdb:src/commands/fun/repeat.js
 
 module.exports = new Command({
     name: "Repeat",
@@ -28,7 +34,7 @@ module.exports = new Command({
     type: "Fun",
     async run(message, args, client) {
 
-        let content = putWordsIntoString(args);
+        let content = misc.stringifyArray(args);
         await message.reply(content);
         
     }

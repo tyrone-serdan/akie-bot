@@ -14,18 +14,37 @@ module.exports = class Client extends Discord.Client {
     }
     start(token) {
         this.login(token);
-        
-        fs.readdirSync("./src/commands")
-        .filter(file => file.endsWith(".js"))
-        .forEach(file => {
-            /**
-             * @type {Command}
-             */
-            const command = require(`../commands/${file}`);
-            console.log(`command ${command.name} is now loaded!`);
-
-            this.commands.set(command.name, command);
-        });
+        let folder = new String();
+        for (let index = 1; index <= 4; index++) {
+            switch (index) {
+                case 1:
+                    folder = "decision"
+                    break;
+                case 2:
+                    folder = "fun"
+                    break;
+                case 3:
+                    folder = "music"
+                    break;
+                case 4:
+                    folder = "helpful"
+                    break;
+            
+                default:
+                    break;
+            }
+            fs.readdirSync(`./src/commands/${folder}`)
+            .filter(file => file.endsWith(".js"))
+            .forEach(file => {
+                /**
+                 * @type {Command}
+                 */
+                const command = require(`../commands/${folder}/${file}`);
+                console.log(`command ${command.name} from ${folder} is now loaded!`);
+    
+                this.commands.set(command.name, command);
+            });
+        }
     }
 
     getCommands() {

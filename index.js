@@ -11,7 +11,7 @@ app.all('/', (req,res) => res.send("I'm Alive!"));
 app.listen(port, () => console.log(`running on localhost:${port}`));
 
 // for small features
-const time = require("./src/data/time.js");
+const misc = require("./src/data/misc.js");
 
 let errorMsg;
 
@@ -37,14 +37,14 @@ client.on('messageCreate', message => {
         return message.reply(msg);
     }
 
+    args.shift(); // Removes command when sending args to command
+
     command.run(message, args, client);
 
 });
 
 client.on('ready', (message) => {
-    const curTime = time.getTime();
-    const HoursToNotify = [1,4,7,10];
-    let justSent = false;
+    const curTime = misc.getTime();
 
     let prettifiedDate = new String();
 
